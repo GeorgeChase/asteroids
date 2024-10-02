@@ -16,6 +16,18 @@ class Asteroid(CircleShape):
     
     def split(self):
         if(self.radius <= ASTEROID_MIN_RADIUS):
+            self.kill()
             return
-        
+        angle = random.uniform(20, 50)
+        positive_rotated = pygame.math.Vector2.rotate(self.velocity, angle)
+        negative_rotated = pygame.math.Vector2.rotate(self.velocity, -angle)
+
+        new_radius = self.radius - ASTEROID_MIN_RADIUS
+
+        pos_split_asteroid = Asteroid(self.position.x, self.position.y, new_radius)
+        neg_split_asteroid = Asteroid(self.position.x, self.position.y, new_radius)
+
+        pos_split_asteroid.velocity = positive_rotated * 1.2
+        neg_split_asteroid.velocity = negative_rotated * 1.2
+
         self.kill()

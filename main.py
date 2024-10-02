@@ -38,8 +38,8 @@ def main():
                 sys.exit()
             for shot in shots:
                 if shot.hasCollided(asteroid_item):
-                    shot.kill()
                     asteroid_item.split()
+                    shot.kill()
         screen.fill(color="black")
         for draw_item in drawable:
             draw_item.draw(screen)
